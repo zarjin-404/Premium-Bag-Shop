@@ -21,17 +21,9 @@ const userSchema = mongoose.Schema({
     minLength: 6,
   },
 
-  cart: {
+  products: {
     type: Array,
     default: [],
-  },
-  isadmin: {
-    type: Boolean,
-    default: false,
-  },
-
-  orders: {
-    type: Array,
   },
 
   contact: {
@@ -40,6 +32,10 @@ const userSchema = mongoose.Schema({
   },
   picture: {
     type: String,
+  },
+  gstin: {
+    type: String,
+    required: true,
   },
 });
 
