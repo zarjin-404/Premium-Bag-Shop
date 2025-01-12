@@ -4,24 +4,21 @@ const router = express.Router();
 const ownerModel = require('../models/owner.models');
 
 router.get('/', (req, res) => {
-  res.send('Hello, I am Owner');
+  res.render('./admin');
 });
 
-if (process.env.NODE_ENV === 'development') {
-  router.post('/create', async (req, res) => {
-    const owner = await ownerModel.findOne();
-    if (owner) {
-      return res.status(400).send('Owner already exists');
-    }
-    const { fullname, email, password } = req.body;
-    try {
-      const newOwner = await ownerModel.create({ fullname, email, password });
-      res.status(201).send(newOwner);
-    } catch (error) {
-      res.status(500).send('Error creating owner');
-    }
-  });
-}
+router.post('/create', async (req, res) => {
+  const { fullname, email, password } = req.body;
+  if (!fullname || !email || !password) {
+    res.status(400).send('Please provide all fields');
+  }
+  try {
+    const owner = await ownerModel.create({ fullname, email, password });
+    res.send(owner);
+  } catch (error) {
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 // Export the router
 module.exports = router;
