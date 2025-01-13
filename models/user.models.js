@@ -5,20 +5,17 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    minLength: 3,
   },
   email: {
     type: String,
     required: true,
     trim: true,
     unique: true,
-    match: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
   },
   password: {
     type: String,
     required: true,
     trim: true,
-    minLength: 6,
   },
 
   cart: {
@@ -36,7 +33,6 @@ const userSchema = mongoose.Schema({
 
   contact: {
     type: Number,
-    required: true,
   },
   picture: {
     type: String,
