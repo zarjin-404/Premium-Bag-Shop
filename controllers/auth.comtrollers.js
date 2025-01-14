@@ -39,12 +39,7 @@ const registerUser = async function (req, res) {
     res.cookie('token', token);
 
     // Respond with user details (excluding password hash)
-    res.status(201).json({
-      id: newUser._id,
-      fullname: newUser.fullname,
-      email: newUser.email,
-      password: newUser.password,
-    });
+    res.redirect('/shop');
   } catch (error) {
     console.error(error);
     res.status(500).send('An error occurred');

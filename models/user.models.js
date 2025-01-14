@@ -18,10 +18,12 @@ const userSchema = mongoose.Schema({
     trim: true,
   },
 
-  cart: {
-    type: Array,
-    default: [],
-  },
+  cart: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'product',
+    },
+  ],
   isadmin: {
     type: Boolean,
     default: false,
