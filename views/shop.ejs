@@ -4,76 +4,65 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+
     <title>Shop</title>
   </head>
-  <body class="bg-gray-50">
-    <div
-      class="w-full h-screen flex flex-col md:flex-row px-5 md:px-20 py-5 md:py-20"
-    >
-      <!-- Sidebar -->
-      <div class="w-full md:w-[25%] flex flex-col items-start">
-        <!-- Sort By -->
-        <div class="flex items-center gap-2 mb-10">
-          <h3 class="text-lg font-semibold">Sort by:</h3>
-          <form action="/shop" onchange="this.submit()">
-            <select
-              class="border border-gray-300 rounded px-3 py-2"
-              name="sortby"
-            >
+  <body>
+    <%- include('./partials/header') %>
+    <div class="w-full h-screen flex items-start px-20 py-20">
+      <div class="w-[25%] flex h-screen flex-col items-start">
+        <div class="flex items-center gap-2">
+          <h3>sort by</h3>
+          <form action="/shop">
+            <select class="border-[1px] px-2 py-1" name="sortby" id="">
               <option value="popular">Popular</option>
               <option value="newest">Newest</option>
             </select>
           </form>
         </div>
-
-        <!-- Links -->
-        <div class="flex flex-col space-y-3">
-          <a class="text-blue-500 hover:underline" href="/new-collection"
-            >New Collection</a
-          >
-          <a class="text-blue-500 hover:underline" href="/all-products"
-            >All Products</a
-          >
-          <a class="text-blue-500 hover:underline" href="/discounted-products"
-            >Discounted Products</a
-          >
+        <div class="flex flex-col mt-20">
+          <a class="block w-fit mb-2" href="">New Collection</a>
+          <a class="block w-fit mb-2" href="">All Products</a>
+          <a class="block w-fit mb-2" href="">Discounted Products</a>
         </div>
-
-        <!-- Filters -->
-        <div class="mt-20 flex flex-col space-y-3">
-          <h4 class="text-lg font-semibold">Filter by:</h4>
-          <a class="text-blue-500 hover:underline" href="/filter-availability"
-            >Availability</a
-          >
-          <a class="text-blue-500 hover:underline" href="/filter-discount"
-            >Discount</a
-          >
+        <div class="mt-32">
+          <a class="block w-fit mb-2" href="">Filter by :</a>
+          <a class="block w-fit mb-2" href="">Availability</a>
+          <a class="block w-fit mb-2" href="">Discount</a>
         </div>
       </div>
-
-      <!-- Main Content -->
-      <div class="w-full md:w-[75%] flex flex-wrap gap-5">
-        <!-- Product Card -->
-        <div
-          class="w-60 border border-gray-300 rounded-lg overflow-hidden shadow-sm"
-        >
-          <div class="w-full h-52 flex items-center justify-center bg-blue-100">
-            <img class="h-[12rem]" src="product.jpg" alt="Product Image" />
-          </div>
-          <div class="flex justify-between items-center px-4 py-4 bg-gray-100">
-            <div>
-              <h3 class="font-semibold text-lg">Product Name</h3>
-              <h4 class="text-gray-700">₹999</h4>
-            </div>
-            <a
-              class="w-7 h-7 flex items-center justify-center rounded-full bg-blue-500 text-white hover:bg-blue-600"
-              href="/add-to-cart"
+      <div class="w-[75%] flex flex-col gap-5 h-screen">
+        <div class="flex items-start gap-5">
+          <% products.forEach(function(product){ %>
+          <div class="w-60">
+            <div
+              class="w-full h-52 flex items-center justify-center bg-[<%= product.bgcolor %>]"
             >
-              <i class="ri-add-line">+</i>
-            </a>
+              <img
+                class="h-[12rem]"
+                src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
+                alt=""
+              />
+            </div>
+            <div
+              class="flex justify-between bg-[<%= product.panelcolor %>] items-center px-4 py-4 text-[<%= product.textcolor %>]"
+            >
+              <div>
+                <h3><%= product.name %></h3>
+                <h4>₹ <%= product.price %></h4>
+              </div>
+              <a
+                class="w-7 h-7 flex items-center justify-center rounded-full bg-white"
+                href=""
+              >
+                <i class="ri-add-line"></i>
+              </a>
+            </div>
           </div>
+          <% }) %>
         </div>
       </div>
     </div>
+    <%- include('./partials/footer') %>
   </body>
 </html>

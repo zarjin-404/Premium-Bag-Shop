@@ -22,12 +22,12 @@ app.use(express.urlencoded({ extended: true }));
 
 const db = require('./config/mongoose.connect');
 
-const homeRouter = require('./routes/index.routes');
+const indexRouter = require('./routes/index.routes');
 const ownerRouter = require('./routes/owners.routes');
 const productRouter = require('./routes/products.routes');
 const userRouter = require('./routes/users.routes');
 
-app.use('/', homeRouter);
+app.use('/', indexRouter);
 app.use('/owners', ownerRouter);
 app.use('/products', productRouter);
 app.use('/users', userRouter);

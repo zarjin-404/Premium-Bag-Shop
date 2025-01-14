@@ -3,10 +3,6 @@ const router = express.Router();
 
 const ownerModel = require('../models/owner.models');
 
-router.get('/', (req, res) => {
-  res.render('./admin');
-});
-
 router.post('/create', async (req, res) => {
   const { fullname, email, password } = req.body;
   if (!fullname || !email || !password) {
@@ -20,5 +16,9 @@ router.post('/create', async (req, res) => {
   }
 });
 
-// Export the router
+router.get('/admin', (req, res) => {
+  const success = req.flash('success');
+  res.render('./createproducts', { success });
+});
+
 module.exports = router;
